@@ -47,18 +47,40 @@ Export the scatterplot:
 ggsave("scatter_plot.pdf", height = 4, width = 6)
 ```
 
+# Problem 2
 
-# Section 1
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+The chunk below creates a data frame comprised of:
+* a random sample of size 10 from a standard Normal distribution
+* a logical vector indicating whether elements of the sample are greater than 0
+* a character vector of length 10
+* a factor vector of length 10, with 3 different factor “levels”
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+p2_df = tibble(
+  samp = rnorm(10),
+  var_logic = samp > 0,
+  var_char = c("a","b","c","b","a","b","c","b","a","b"),
+  var_factor = factor(c("Mon","Fri","Sun","Fri","Mon","Fri","Sun","Mon","Fri","Sun"))
+)
 ```
 
-# Section 2
+Then I will try to take the mean of each variable in my dataframe.
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+```{r}
+mean(pull(p2_df, samp))
+mean(pull(p2_df, var_logic))
+mean(pull(p2_df, var_char))
+mean(pull(p2_df, var_factor))
+```
+
+The means for the random sample and the logical vector worked, but the charactor and the factor vectors did not.
+
+This is going to write a code chunk that applies the `as.numeric` function to the logical, character, and factor variables:
+
+```{r eval=FALSE}
+as.numeric(p2_df$var_logic)
+as.numeric(p2_df$var_char)
+as.numeric(p2_df$var_factor)
+```
+
+The logical and factor variables are successfully converted to numeric, but for the charactor variable, it shows _NAs introduced by coercion_ and only NAs are shown in the output.

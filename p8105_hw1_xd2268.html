@@ -422,17 +422,44 @@ ggplot(plot_df, aes(x = x, y = y, color = Species)) + geom_point()</code></pre>
 <p>Export the scatterplot:</p>
 <pre class="r"><code>ggsave(&quot;scatter_plot.pdf&quot;, height = 4, width = 6)</code></pre>
 </div>
-<div id="section-1" class="section level1">
-<h1>Section 1</h1>
-<p>Here’s a <strong>code chunk</strong> that samples from a <em>normal
-distribution</em>:</p>
-<pre class="r"><code>samp = rnorm(100)
-length(samp)</code></pre>
-<pre><code>## [1] 100</code></pre>
-</div>
-<div id="section-2" class="section level1">
-<h1>Section 2</h1>
-<p>I can take the mean of the sample, too! The mean is 0.0827405.</p>
+<div id="problem-2" class="section level1">
+<h1>Problem 2</h1>
+<p>The chunk below creates a data frame comprised of: * a random sample
+of size 10 from a standard Normal distribution * a logical vector
+indicating whether elements of the sample are greater than 0 * a
+character vector of length 10 * a factor vector of length 10, with 3
+different factor “levels”</p>
+<pre class="r"><code>p2_df = tibble(
+  samp = rnorm(10),
+  var_logic = samp &gt; 0,
+  var_char = c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;a&quot;,&quot;b&quot;),
+  var_factor = factor(c(&quot;Mon&quot;,&quot;Fri&quot;,&quot;Sun&quot;,&quot;Fri&quot;,&quot;Mon&quot;,&quot;Fri&quot;,&quot;Sun&quot;,&quot;Mon&quot;,&quot;Fri&quot;,&quot;Sun&quot;))
+)</code></pre>
+<p>Then I will try to take the mean of each variable in my
+dataframe.</p>
+<pre class="r"><code>mean(pull(p2_df, samp))</code></pre>
+<pre><code>## [1] -0.130242</code></pre>
+<pre class="r"><code>mean(pull(p2_df, var_logic))</code></pre>
+<pre><code>## [1] 0.4</code></pre>
+<pre class="r"><code>mean(pull(p2_df, var_char))</code></pre>
+<pre><code>## Warning in mean.default(pull(p2_df, var_char)): argument is not numeric or
+## logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean(pull(p2_df, var_factor))</code></pre>
+<pre><code>## Warning in mean.default(pull(p2_df, var_factor)): argument is not numeric or
+## logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>The means for the random sample and the logical vector worked, but
+the charactor and the factor vectors did not.</p>
+<p>This is going to write a code chunk that applies the
+<code>as.numeric</code> function to the logical, character, and factor
+variables:</p>
+<pre class="r"><code>as.numeric(p2_df$var_logic)
+as.numeric(p2_df$var_char)
+as.numeric(p2_df$var_factor)</code></pre>
+<p>The logical and factor variables are successfully converted to
+numeric, but for the charactor variable, it shows <em>NAs introduced by
+coercion</em> and only NAs are shown in the output.</p>
 </div>
 
 
