@@ -1,6 +1,6 @@
 ---
 title: "P8105 Homework 1"
-output: html_document
+output: github_document
 ---
 
 ```{r}
@@ -15,13 +15,13 @@ Firstly let's load the `penguins` dataset ( after installing package `palmerpeng
 data("penguins", package = "palmerpenguins")
 ```
 
-Then let's check what are inside of the dataset:
+Let's check what are inside of the dataset:
 
 ```{r}
 penguins
 ```
 
-* There are 8 variables, including **species**, **island**, **bill_length_mm**, **bill_depth_mm**, **flipper_length_mm**, **body_mass_g**, **sex**, **year**.
+* There are 8 variables, including **species**, **island**, **bill_length_mm**, **bill_depth_mm**, **flipper_length_mm**, **body_mass_g**, **sex**, **year**. _NA_ denotes missing data. **species**, **island**, and **sex** are factor vectors, while the rest are numeric.
 
 * There are `r nrow(penguins)` rows and `r ncol(penguins)` columns in the dataset.
 
@@ -50,6 +50,7 @@ ggsave("scatter_plot.pdf", height = 4, width = 6)
 # Problem 2
 
 The chunk below creates a data frame comprised of:
+
 * a random sample of size 10 from a standard Normal distribution
 * a logical vector indicating whether elements of the sample are greater than 0
 * a character vector of length 10
@@ -75,6 +76,7 @@ mean(pull(p2_df, var_factor))
 
 The means for the random sample and the logical vector worked, but the charactor and the factor vectors did not.
 
+
 This is going to write a code chunk that applies the `as.numeric` function to the logical, character, and factor variables:
 
 ```{r eval=FALSE}
@@ -83,4 +85,4 @@ as.numeric(p2_df$var_char)
 as.numeric(p2_df$var_factor)
 ```
 
-The logical and factor variables are successfully converted to numeric, but for the charactor variable, it shows _NAs introduced by coercion_ and only NAs are shown in the output.
+The logical and factor variables are successfully converted to numeric, but for the charactor variable, it shows _NAs introduced by coercion_ and only NAs are shown in the output. Because the charactor variable in this data frame created consists of letters rather than numbers. And for the factor, it is converted to the level number.
